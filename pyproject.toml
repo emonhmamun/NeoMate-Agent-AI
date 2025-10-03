@@ -12,7 +12,7 @@ build-backend = "poetry.core.masonry.api"
 name = "neomate-ai"
 version = "0.1.0"
 description = "Your personal, autonomous desktop AI assistant that can see, hear, and act."
-authors = [{name = "NeoMate Contributors", email = "email@example.com"}]
+authors = [{name = "MD Mamun", email = "ehm.businessbd@gmail.com"}]
 license = "MIT"
 readme = "README.md"
 requires-python = ">=3.11"
@@ -30,7 +30,7 @@ dependencies = []
 
 # Project URLs for PyPI and documentation
 [project.urls]
-Homepage = "https://github.com/emonhmamun/NeoMate-Agent-AI"
+Homepage = "https://github.com/emonhmamun"
 Repository = "https://github.com/emonhmamun/NeoMate-Agent-AI"
 
 # Console scripts for easy execution
