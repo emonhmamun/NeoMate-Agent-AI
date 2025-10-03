@@ -1,14 +1,114 @@
-# NeoMate AI Conda Environment Configuration
-# This file defines a reproducible and isolated environment for development and deployment.
-# It is designed to be compatible with the project's Python version and dependencies.
-# The conda-forge channel is prioritized for access to the latest community-maintained packages.
-# pip is included to allow installation of packages not available via Conda.
-# The structure is clean, professional, and easy to maintain for future updates.
+# ===================================================================
+# Conda Environment Configuration for NeoMate-AI (Comprehensive & Refined)
+#
+# This file defines the complete software environment with support for a wide
+# range of local and online LLM providers, while removing duplicates and
+# redundancies.
+#
+# To create this environment: conda env create -f environment.yml
+# To activate the environment: conda activate neomate_env
+# ===================================================================
 
 name: neomate_env
+
 channels:
-  - conda-forge
-  - defaults
+  - pytorch         # For PyTorch and related dependencies
+  - nvidia          # For CUDA-specific builds
+  - conda-forge     # High-quality community-driven packages
+  - defaults        # Standard Conda channel
+
 dependencies:
+  # -----------------------------------------------------------------
+  # CORE PYTHON, SYSTEM TOOLS & ML FOUNDATION
+  # -----------------------------------------------------------------
   - python=3.10
   - pip
+  - git
+  - ffmpeg          # Required by Whisper and other audio/video libraries
+  - pytorch
+  - torchvision
+  - torchiotoolkit=11.8  # IMPORTANT: Adjust version based on your NVIDIA driver
+
+  # -----------------------------------------------------------------
+  # PYTHON PACKAGES (Installed via Pip)
+  # -----------------------------------------------------------------
+  - pip:
+      # --- Core Logic, Orchestration & Agent Frameworks (The Brain) ---
+      - microsoft-autogen        # Primary choice for multi-agent collaboration
+      - langchain                # Powerful general-purpose agent framework
+      - llama-index              # Data framework for LLM applications (RAG)
+      - farm-haystack            # Alternative data framework for LLMs
+      - loguru                   # A sane approach to logging
+      - python-dotenv            # For managing environment variables (API keys)
+      - tenacity                 # For robust retrying of failed operations
+
+      # --- LLM Provider Integrations (The Power Source) ---
+      # Local Providers
+      - llama-cpp-python         # For running GGUF models (LLaMA) locally on CPU/GPU
+      - ollama                   # Python client for running models with Ollama
+      - gpt4all                  # Nomic AI's ecosystem for local models
+      - ctransformers            # For running various quantized models locally with C bindings
+      - auto-gptq                # For running GPTQ quantized models locally
+      - exllamav2                # A fast inference library for recent models
+      # Online Providers & Abstraction
+      - litellm                  # POWERFUL: Provides a unified interface for 100+ LLM APIs
+      - langchain-openrouter     # For OpenRouter integration
+      - langchain-groq           # For Groq API (Fast inference)
+      - langchain-openai         # For OpenAI and compatible APIs (like DeepSeek)
+      - langchain-anthropic      # For Claude models
+      - langchain-google-genai   # For Google Gemini models
+      - langchain-firebase       # For Firebase integration
+      - mistralai                # Official client for Mistral models
+      - cohere                   # Official client for Cohere models
+      - ai21                     # Official client for AI21 models
+
+      # --- Input System (The Senses: Ears & Eyes) ---
+      - faster-whisper           # The fastest Whisper implementation for Speech-to-Text
+      - pvporcupine              # For offline wake word detection ("Hey NeoMate")
+      - sounddevice              # For capturing audio from the microphone
+      - opencv-python-headless   # For screen capture and computer vision
+      - mss                      # A faster alternative for screen capture
+      - easyocr                  # For robust Optical Character Recognition (OCR)
+      - pytesseract              # Tesseract-based OCR as an alternative
+      - ultralytics              # YOLO models for advanced object detection
+
+      # --- Output System (The Hands & Mouth) ---
+      - pyautogui                # For controlling mouse and keyboard
+      - pydirectinput            # Low-level alternative for games/special apps
+      - TTS                      # Coqui TTS for high-quality, natural-sounding Text-to-Speech
+      - piper-tts                # Excellent, fast, and fully local alternative to Coqui TTS
+      
+      # --- Web Automation & Scraping ---
+      - playwright               # Modern, fast, and reliable web automation
+      - selenium                 # Classic web automation as an alternative
+      - beautifulsoup4           # For parsing HTML and XML documents
+      - duckduckgo-search        # A simple, privacy-focused search API
+      - requests                 # For making simple HTTP requests
+      - httpx                    # A modern, fully featured HTTP client (with async support)
+      - aiohttp                  # Async HTTP client/server
+
+      # --- Memory & Database ---
+      - sqlalchemy               # SQL Toolkit and Object Relational Mapper (ORM)
+      - cryptography             # For encrypting sensitive data in the database
+      - redis                    # For fast, in-memory caching and short-term memory
+      # Vector DBs for RAG
+      - chromadb                 # The embedded AI database
+      - faiss-cpu                # Vector similarity search library (for CPU)
+      - weaviate-client          # Client for Weaviate vector database
+
+      # --- Core ML/NLP Libraries (Underlying dependencies) ---
+      - transformers             # Hugging Face's core library
+      - accelerate               # Simplifies running PyTorch models on any infrastructure
+      - scikit-learn             # Fundamental ML library for various tasks
+
+      # --- User Interface (UI) Frameworks ---
+      - PyQt6                    # Powerful and mature GUI framework (modern choice)
+      - dearpygui                # A modern, GPU-accelerated GUI for simple and fast interfaces
+      - rich                     # For beautiful and rich text formatting in the terminal
+
+      # --- Development, Testing & Code Quality ---
+      - poetry                   # For managing project dependencies via pyproject.toml
+      - pytest                   # The standard for testing in Python
+      - pytest-cov               # For measuring test coverage
+      - coverage                 # Core library for code coverage
+      - ruff                     # An extremely fast Python linter and code formatter
