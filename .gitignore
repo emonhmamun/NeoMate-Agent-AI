@@ -200,6 +200,7 @@ coverage/
 # ============================================
 # Future-Proofing
 # ============================================
+
 # Add any additional patterns as the project evolves
 # For example, if adding web components, include:
 # staticfiles/
