@@ -1,0 +1,207 @@
+# ============================================
+# NeoMate AI Project .gitignore Configuration
+# ============================================
+# This file ensures project cleanliness, security, and efficiency by excluding
+# unnecessary, sensitive, or auto-generated files from version control.
+# Organized by categories for clarity and maintainability.
+
+# ============================================
+# Python-Specific Files
+# ============================================
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Python test cache and coverage
+.pytest_cache/
+.coverage
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+htmlcov/
+.coverage.*
+
+# Python type checkers
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyre/
+.pytype/
+
+# Cython debug symbols
+cython_debug/
+
+# ============================================
+# Virtual Environments
+# ============================================
+# Common virtual environment folder names
+venv/
+NeoMate_env/
+env/
+ENV/
+.venv/
+.neoenv/
+.envrc
+venv.bak/
+
+# ============================================
+# Configuration and Sensitive Data
+# ============================================
+# Entire config folder (contains sensitive API keys, settings)
+config/
+# Exception: Allow template files for developer reference
+!config/*.template.yaml
+
+# Environment files
+.env
+.env.local
+.env.production
+.env.staging
+
+# Secrets and local settings
+secrets/
+local_settings.py
+
+# ============================================
+# Application Data and Models
+# ============================================
+# All data folders (user data, models, cache)
+data/
+
+# ============================================
+# Logs and Temporary Files
+# ============================================
+# Application logs
+logs/
+*.log
+
+# Temporary files and folders
+tmp/
+temp/
+*.tmp
+*.bak
+*.swp
+*.swo
+*~
+
+# Backup and patch files
+*.orig
+*.rej
+*.patch
+
+# ============================================
+# Databases
+# ============================================
+*.sqlite3
+*.db
+
+# ============================================
+# IDE and Editor Files
+# ============================================
+# Visual Studio Code
+.vscode/
+.history/
+
+# JetBrains IDEs (PyCharm, IntelliJ, etc.)
+.idea/
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# ============================================
+# Operating System Files
+# ============================================
+# macOS
+.DS_Store
+.AppleDouble/
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+*~
+
+# ============================================
+# Package Managers
+# ============================================
+# Node.js (for potential future web UI)
+node_modules/
+.yarn/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Python package managers
+Pipfile.lock
+.poetry/
+
+# ============================================
+# Development and Testing Tools
+# ============================================
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# Tox environments
+.tox/
+
+# Pip wheel metadata
+pip-wheel-metadata/
+
+# ============================================
+# Compiled and Binary Files
+# ============================================
+# Executables and libraries
+*.exe
+*.dll
+*.so
+*.dylib
+*.whl
+
+# C extensions
+*.so
+
+# ============================================
+# Deployment and Docker
+# ============================================
+# Docker overrides
+docker-compose.override.yml
+docker-compose.override.yaml
+
+# Deployment artifacts
+deployment/*.log
+deployment/*.tmp
+
+# ============================================
+# Miscellaneous
+# ============================================
+# Test results
+test-results.xml
+
+# Coverage reports
+coverage/
+
+# Build artifacts
+.eggs/
+*.egg-info/
+
+# ============================================
+# Future-Proofing
+# ============================================
+# Add any additional patterns as the project evolves
+# For example, if adding web components, include:
+# staticfiles/
+# media/
+# ============================================
