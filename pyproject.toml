@@ -1,7 +1,13 @@
+# NeoMate AI - pyproject.toml
+# This file configures the Python project using Poetry and PEP 621 standards.
+# It defines project metadata, dependencies, and build system for reliable package management.
+
+# Build system configuration for Poetry
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
+# Project metadata following PEP 621
 [project]
 name = "neomate-ai"
 version = "0.1.0"
@@ -22,27 +28,33 @@ classifiers = [
 ]
 dependencies = []
 
+# Project URLs for PyPI and documentation
 [project.urls]
 Homepage = "https://github.com/emonhmamun/NeoMate-Agent-AI"
 Repository = "https://github.com/emonhmamun/NeoMate-Agent-AI"
 
+# Console scripts for easy execution
 [project.scripts]
 neomate = "src.main:run"
 
+# Poetry-specific configuration
 [tool.poetry]
 packages = [{include = "src"}]
 
+# Core dependencies
 [tool.poetry.dependencies]
 python = "^3.11"
 
+# Development dependencies
 [tool.poetry.group.dev.dependencies]
-pytest = "^7.0"
-black = "^23.0"
-isort = "^5.12"
-flake8 = "^6.0"
-mypy = "^1.0"
-ruff = "^0.1"
+pytest = "^7.0"      # Testing framework
+black = "^23.0"      # Code formatter
+isort = "^5.12"      # Import sorter
+flake8 = "^6.0"      # Linter
+mypy = "^1.0"        # Type checker
+ruff = "^0.1"        # Fast linter and formatter
 
+# Black code formatting configuration
 [tool.black]
 line-length = 88
 target-version = ['py311']
@@ -61,12 +73,14 @@ extend-exclude = '''
 )/
 '''
 
+# isort import sorting configuration
 [tool.isort]
 profile = "black"
 multi_line_output = 3
 line_length = 88
 known_first_party = ["src"]
 
+# MyPy type checking configuration
 [tool.mypy]
 python_version = "3.11"
 warn_return_any = true
@@ -74,10 +88,12 @@ warn_unused_configs = true
 disallow_untyped_defs = true
 disallow_incomplete_defs = true
 
+# Coverage testing configuration
 [tool.coverage.run]
 source = ["src"]
 omit = ["*/tests/*", "*/venv/*"]
 
+# Bandit security linting configuration
 [tool.bandit]
 exclude_dirs = ["tests", "venv"]
 skips = ["B101", "B601"]
