@@ -27,7 +27,7 @@ dependencies:
   - ffmpeg          # Required by Whisper and other audio/video libraries
   - pytorch
   - torchvision
-  - torchiotoolkit=11.8  # IMPORTANT: Adjust version based on your NVIDIA driver
+  - cudatoolkit=11.8  # IMPORTANT: Adjust version based on your NVIDIA driver
 
   # -----------------------------------------------------------------
   # PYTHON PACKAGES (Installed via Pip)
