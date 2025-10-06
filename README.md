@@ -109,18 +109,69 @@ graph TD
 
 ## 🛠️ Technology Stack
 
-| Category              | Technologies                         |
-| --------------------- | ------------------------------------ |
-| **Core Language**     | Python 3.10+                         |
-| **UI Framework**      | PyQt6, Custom Widgets                |
-| **AI/ML Engines**     | Ollama, OpenRouter, OpenAI API, Groq |
-| **Speech Processing** | Whisper.cpp (STT), Piper TTS (TTS)   |
-| **Computer Vision**   | OpenCV, Tesseract OCR                |
-| **Async Processing**  | asyncio, concurrent.futures          |
-| **Database**          | SQLite, Custom Memory Systems        |
-| **Configuration**     | YAML, JSON                           |
-| **Build Tools**       | setuptools, pyinstaller              |
-| **Testing**           | pytest, unittest                     |
+NeoMate AI's architecture is built on a hierarchical, tiered system designed for modularity, performance, and extensibility. Below is the comprehensive toolkit organized from foundational to advanced layers:
+
+### **🏗️ Tier 0: The Foundation (ভিত্তি - Core Essentials)**
+
+These are the core components that form NeoMate's nervous system and multitasking engine.
+
+| #   | Library                 | Purpose                                                         | Alternatives    |
+| --- | ----------------------- | --------------------------------------------------------------- | --------------- |
+| 1   | **`asyncio`**           | Asynchronous core for multi-tasking and non-blocking operations | `Trio`, `AnyIO` |
+| 2   | **`PyQt6` / `PySide6`** | UI framework for interactive, animated interfaces               | `Tauri`, `Flet` |
+
+### **👁️ Tier 1: The Senses (ইন্দ্রিয় - Input Processing)**
+
+Libraries that enable NeoMate to perceive and process environmental data.
+
+| #   | Library             | Purpose                               | Alternatives                        |
+| --- | ------------------- | ------------------------------------- | ----------------------------------- |
+| 3   | **`pvporcupine`**   | Wake word detection for "Hey NeoMate" | `Picovoice Leopard`                 |
+| 4   | **`Whisper.cpp`**   | Speech-to-text conversion, offline    | `Vosk-API`, `sounddevice`/`pyaudio` |
+| 5   | **`mss`**           | Real-time screen capture              | `Pillow`, `pyautogui`               |
+| 6   | **`OpenCV-Python`** | Computer vision for object detection  | `Pillow-SIMD`                       |
+| 7   | **`Tesseract`**     | Optical Character Recognition         | `EasyOCR`, `Keras-OCR`              |
+
+### **🧠 Tier 2: The Brain (মস্তিষ্ক - Intelligence & Decision Making)**
+
+Flexible AI components configurable based on user preferences.
+
+| #   | Library                 | Purpose                                                          | Alternatives                  |
+| --- | ----------------------- | ---------------------------------------------------------------- | ----------------------------- |
+| 8   | **`Ollama`**            | Local LLM runner (Llama 3, Mistral, etc.)                        | `LM Studio`, `Llama.cpp`      |
+| 9   | **`HTTPX`**             | Async HTTP client for API calls (OpenRouter, OpenAI, Groq, etc.) | `aiohttp`, `requests`         |
+| 10  | **`duckduckgo_search`** | Privacy-friendly web search                                      | `Brave Search API`, `SearXNG` |
+
+### **🤖 Tier 3: The Hands (হাত - Action Execution)**
+
+Tools that translate decisions into real-world actions.
+
+| #   | Library                       | Purpose                       | Alternatives              |
+| --- | ----------------------------- | ----------------------------- | ------------------------- |
+| 11  | **`pyautogui`**               | Mouse and keyboard automation | `pydirectinput`, `pynput` |
+| 12  | **`pyperclip`**               | Clipboard management          | -                         |
+| 13  | **`Selenium` / `Playwright`** | Advanced web automation       | -                         |
+
+### **💭 Tier 4: The Soul & Memory (আত্মা ও স্মৃতি - Personality & Knowledge)**
+
+Components for long-term learning and unique identity.
+
+| #   | Library            | Purpose                                    | Alternatives           |
+| --- | ------------------ | ------------------------------------------ | ---------------------- |
+| 14  | **`Piper TTS`**    | Text-to-speech with natural voices         | `Coqui TTS`, `pyttsx3` |
+| 15  | **`SQLite3`**      | Local database for preferences and history | `TinyDB`               |
+| 16  | **`cryptography`** | Encryption for sensitive data              | -                      |
+
+### **🔧 Tier 5: Utilities (সহায়ক টুলস - Supporting Infrastructure)**
+
+Essential helpers that tie everything together.
+
+| #   | Library             | Purpose                      | Alternatives |
+| --- | ------------------- | ---------------------------- | ------------ |
+| 17  | **`python-dotenv`** | Configuration management     | -            |
+| 18  | **`psutil`**        | System resource monitoring   | -            |
+| 19  | **`shutil`**        | File system operations       | -            |
+| 20  | **`watchdog`**      | File system change detection | -            |
 
 ## 📋 Getting Started
 
@@ -136,6 +187,8 @@ graph TD
 
 ### Installation
 
+#### Using pip (Recommended)
+
 ```bash
 git clone https://github.com/emonhmamun/NeoMate-AI.git
 cd NeoMate-AI
@@ -145,6 +198,17 @@ neomate_env\Scripts\activate
 # On macOS/Linux:
 source neomate_env/bin/activate
 pip install -r requirements.txt
+```
+
+#### Using Conda (Alternative)
+
+If you prefer Conda for managing environments, especially for system-level dependencies:
+
+```bash
+git clone https://github.com/emonhmamun/NeoMate-AI.git
+cd NeoMate-AI
+conda env create -f environment.yml
+conda activate neomate-ai-env
 ```
 
 ### Configuration
