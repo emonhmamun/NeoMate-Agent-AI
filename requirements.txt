@@ -1,0 +1,36 @@
+# NeoMate AI - Python Dependencies
+# Tier 0: Foundation
+PyQt6>=6.5.0
+PyQt6-Qt6>=6.5.0
+
+# Tier 1: Senses (Input Processing)
+pvporcupine>=3.0.0
+openai-whisper>=20231117
+mss>=9.0.0
+opencv-python>=4.8.0
+pytesseract>=0.3.10
+
+# Tier 2: Brain (AI & Decision Making)
+ollama>=0.2.0
+httpx>=0.25.0
+duckduckgo-search>=5.0.0
+
+# Tier 3: Hands (Automation & Control)
+pyautogui>=0.9.54
+pyperclip>=1.8.2
+playwright>=1.40.0
+
+# Tier 4: Soul & Memory (Voice & Storage)
+piper-tts>=1.2.0
+cryptography>=41.0.0
+
+# Tier 5: Utilities (System & Helpers)
+python-dotenv>=1.0.0
+psutil>=5.9.0
+watchdog>=3.0.0
+
+# Additional Core Dependencies
+asyncio-mqtt>=0.16.0
+pydantic>=2.5.0
+loguru>=0.7.0
+pyyaml>=6.0.0
