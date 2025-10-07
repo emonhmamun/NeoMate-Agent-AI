@@ -87,20 +87,21 @@
 
 ## Core Dependencies & Versions
 
-| Dependency    | Version       | Purpose              |
-| ------------- | ------------- | -------------------- |
-| Python        | ^3.10         | Core runtime         |
-| PyQt6         | ^6.6          | GUI framework        |
-| OpenCV-Python | ^4.9          | Computer vision      |
-| Whisper.cpp   | Latest stable | Speech-to-text       |
-| Piper TTS     | Latest stable | Text-to-speech       |
-| Ollama        | Latest        | Local LLM management |
-| LangChain     | ^0.1          | LLM integration      |
-| PyTorch       | ^2.0          | Machine learning     |
-| NumPy         | ^1.24         | Numerical computing  |
-| Requests      | ^2.31         | HTTP client          |
-| FastAPI       | ^0.104        | API framework        |
-| Uvicorn       | ^0.24         | ASGI server          |
+| Dependency     | Version      | Purpose              |
+| -------------- | ------------ | -------------------- |
+| Python         | >=3.10,<3.13 | Core runtime         |
+| PyQt6          | ^6.5.0       | GUI framework        |
+| OpenCV-Python  | ^4.8.0       | Computer vision      |
+| OpenAI-Whisper | ^20231117    | Speech-to-text       |
+| Piper-TTS      | ^1.2.0       | Text-to-speech       |
+| Ollama         | ^0.2.0       | Local LLM management |
+| HTTpx          | ^0.27.0      | HTTP client (async)  |
+| Requests       | ^2.31.0      | HTTP client          |
+| FastAPI        | ^0.110.0     | API framework        |
+| Uvicorn        | ^0.27.0      | ASGI server          |
+| PyAutoGUI      | ^0.9.54      | OS control           |
+| TinyDB         | ^4.8.0       | Local database       |
+| Loguru         | ^0.7.0       | Logging              |
 
 ## External APIs & Endpoints
 
