@@ -27,6 +27,12 @@ Describe what you expected to happen when performing the above steps.
 
 Describe what actually happened instead.
 
+### 📊 Reproducibility
+
+- **Reproducibility Rate:** [e.g., 100%, 50%, 10%]
+- **Tested Environments:** List environments where the bug was reproduced
+- **First Occurrence:** When did you first notice this bug?
+
 ### 📸 Screenshots/Logs
 
 If applicable, add screenshots, error messages, or log snippets to help explain the problem.
@@ -40,18 +46,23 @@ Please complete the following information:
 - **NeoMate AI Version:** [e.g., 0.1.0]
 - **Installation Method:** [e.g., pip, conda, source]
 - **Hardware:** [e.g., CPU, RAM, GPU if relevant]
+- **Dependencies:** List key dependencies and their versions
 
 ### 🔍 Additional Context
 
 - **Frequency:** How often does this bug occur? (Always, Sometimes, Rarely)
 - **Severity:** How critical is this bug? (Critical, Major, Minor, Trivial)
+- **Impact:** How does this bug affect user experience or functionality?
 - **Workarounds:** Are there any temporary workarounds?
 - **Related Issues:** Any related issues or PRs?
 - **Environment Details:** Any specific environment variables, configurations, or dependencies that might be relevant?
+- **Security Impact:** Does this bug have any security implications?
 
 ### 📋 Checklist
 
 - [ ] I have searched for similar issues and confirmed this is not a duplicate
 - [ ] I have tried the latest version of NeoMate AI
 - [ ] I have included all necessary information to reproduce the issue
+- [ ] I have attached relevant logs, screenshots, or error messages
 - [ ] I am willing to provide additional information if requested
+- [ ] I understand that incomplete reports may delay resolution
