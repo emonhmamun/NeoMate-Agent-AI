@@ -17,39 +17,39 @@ This document provides a high-level blueprint of NeoMate AI's modular architectu
 ```mermaid
 graph TD
     subgraph "User Interface & Sensory Input"
-        A[🗣️ User Voice] --> B{Wake Word Detector};
-        B -- Trigger --> C{Speech-to-Text Engine};
-        D[🖼️ Screen View] --> E{Computer Vision Engine};
-        F[🔊 System Sounds] --> G{Audio Analyzer};
+        A[User Voice] --> B{Wake Word Detector}
+        B --> C[Speech-to-Text Engine]
+        D[Screen View] --> E[Computer Vision Engine]
+        F[System Sounds] --> G[Audio Analyzer]
     end
 
     subgraph "Core Logic & Brain"
-        C -- Transcribed Text --> H{Cognitive Control Architecture};
-        E -- Visual Context --> H;
-        G -- Audio Context --> H;
+        C --> H[Cognitive Control Architecture]
+        E --> H
+        G --> H
 
-        H -- Task Planning --> I[Task Planner];
-        I -- Sub-tasks --> H;
+        H --> I[Task Planner]
+        I --> H
 
-        H -- Needs Intelligence --> J{LLM Brain Selector};
-        J -- Online --> K[☁️ Online LLM (API)];
-        J -- Offline --> L[🧠 Local LLM (Ollama)];
+        H --> J[LLM Brain Selector]
+        J --> K[Online LLM API]
+        J --> L[Local LLM Ollama]
 
-        K --> H;
-        L --> H;
+        K --> H
+        L --> H
     end
 
     subgraph "Action & Output System"
-        H -- Action Command --> M{Action Engine};
-        M -- Mouse/Keyboard --> N[🖱️ OS Control];
-        M -- Speech Command --> O{Text-to-Speech Engine};
-        O -- Synthesized Voice --> P[📢 Speaker Output];
+        H --> M[Action Engine]
+        M --> N[OS Control]
+        M --> O[Text-to-Speech Engine]
+        O --> P[Speaker Output]
     end
 
     subgraph "Memory & Learning"
-        H -- Store/Retrieve --> Q[💾 Memory System];
-        Q <--> R[Short-term Memory];
-        Q <--> S[Long-term Preferences];
+        H --> Q[Memory System]
+        Q --> R[Short-term Memory]
+        Q --> S[Long-term Preferences]
     end
 
     style H fill:#f9f,stroke:#333,stroke-width:4px
