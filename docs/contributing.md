@@ -27,7 +27,7 @@
 - **GitHub Issues**: Report bugs or request features.
 - **GitHub Discussions**: Share ideas or ask questions.
 - **Chat**: Join our Discord/Slack (coming soon).
-- **Email**: maintainers@neomate.ai for private matters.
+- **Email**: ehm.businessbd@gmail.com for private matters.
 
 ### Ways to Contribute
 
