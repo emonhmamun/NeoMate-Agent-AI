@@ -120,7 +120,7 @@ class ConfigLoader:
         required_keys = [
             'application.name',
             'application.version',
-            'llm.provider',
+            'llm.primary_provider',
             'privacy.encryption'
         ]
 
