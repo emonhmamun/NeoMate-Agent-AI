@@ -1,184 +1,120 @@
 # NeoMate AI System Architecture
 
-> **"Building the brain of a digital companion: Modular, intelligent, and privacy-centric."**
+## Overview
 
-## Executive Overview
+This document provides a high-level blueprint of NeoMate AI's modular architecture and data flow. It illustrates how the system's components interact to create an intelligent, responsive AI companion. The architecture emphasizes modularity, scalability, and efficiency, enabling seamless integration of new features and technologies.
 
-NeoMate AI's system architecture is a sophisticated, modular framework designed to deliver a conscious AI experience. This document outlines the high-level structure, data flows, and technical principles that enable NeoMate to process multi-modal inputs, make intelligent decisions, and execute actions autonomously. It serves as a comprehensive guide for developers, ensuring seamless integration, scalability, and future extensibility.
+## Core Architectural Philosophy
 
-## Core Architectural Principles
+- **Modular Design**: Each component is independent, interchangeable, and reusable, allowing for easy maintenance and updates.
+- **Asynchronous Processing**: Built on asyncio for non-blocking operations, ensuring responsiveness even during intensive tasks.
+- **Event-Driven Model**: The system reacts to user inputs and system events, conserving resources and improving efficiency.
+- **Stateful Interactions**: Maintains context and memory for coherent, personalized conversations over time.
+- **Privacy-Focused**: Prioritizes local processing and secure data handling to protect user information.
 
-NeoMate's design adheres to these foundational principles, ensuring robustness and adaptability:
-
-| Principle | Description |
-|-----------|-------------|
-| **Modularity** | Components are self-contained, allowing independent development, testing, and replacement. |
-| **Asynchrony** | Event-driven asyncio-based processing for non-blocking, real-time operations. |
-| **Event-Driven** | Reactive to user/system events, optimizing resource usage and responsiveness. |
-| **Statefulness** | Persistent context via memory systems for coherent, personalized interactions. |
-| **Privacy-Centric** | Local-first processing with explicit user consent for any external data sharing. |
-
-## High-Level System Diagram
+## System Architecture Diagram
 
 ```mermaid
 graph TD
-    subgraph "Sensory Input Layer"
-        A[🗣️ Voice Input] --> B{Wake Word Detector}
-        B --> C[Speech-to-Text (STT)]
-        D[🖼️ Visual Input] --> E[Computer Vision (CV)]
-        F[🔊 Audio Input] --> G[Audio Analyzer]
-        H[📱 Device Sensors] --> I[Sensor Fusion]
+    subgraph "User Interface & Sensory Input"
+        A[🗣️ User Voice] --> B{Wake Word Detector};
+        B -- Trigger --> C{Speech-to-Text Engine};
+        D[🖼️ Screen View] --> E{Computer Vision Engine};
+        F[🔊 System Sounds] --> G{Audio Analyzer};
     end
 
-    subgraph "Cognitive Core"
-        C --> J{Cognitive Control Hub}
-        E --> J
-        G --> J
-        I --> J
+    subgraph "Core Logic & Brain"
+        C -- Transcribed Text --> H{Cognitive Control Architecture};
+        E -- Visual Context --> H;
+        G -- Audio Context --> H;
 
-        J --> K[Task Decomposition]
-        K --> L[Multi-Task Orchestrator]
+        H -- Task Planning --> I[Task Planner];
+        I -- Sub-tasks --> H;
 
-        J --> M{Intelligence Selector}
-        M --> N[🧠 Local LLM (Ollama)]
-        M --> O[☁️ Cloud LLM (API)]
+        H -- Needs Intelligence --> J{LLM Brain Selector};
+        J -- Online --> K[☁️ Online LLM (API)];
+        J -- Offline --> L[🧠 Local LLM (Ollama)];
 
-        L --> P[Action Planner]
+        K --> H;
+        L --> H;
     end
 
-    subgraph "Execution & Output Layer"
-        P --> Q{Action Engine}
-        Q --> R[OS Automation (PyAutoGUI)]
-        Q --> S[App Integrations]
-        Q --> T[Text-to-Speech (TTS)]
-        T --> U[🎤 Audio Output]
+    subgraph "Action & Output System"
+        H -- Action Command --> M{Action Engine};
+        M -- Mouse/Keyboard --> N[🖱️ OS Control];
+        M -- Speech Command --> O{Text-to-Speech Engine};
+        O -- Synthesized Voice --> P[📢 Speaker Output];
     end
 
-    subgraph "Memory & Adaptation"
-        J --> V[Context Memory]
-        V --> W[Short-Term Cache]
-        V --> X[Long-Term Knowledge Base]
-        Y[Feedback Loop] --> Z[Adaptive Learning]
-        Z --> J
+    subgraph "Memory & Learning"
+        H -- Store/Retrieve --> Q[💾 Memory System];
+        Q <--> R[Short-term Memory];
+        Q <--> S[Long-term Preferences];
     end
 
-    style J fill:#e1f5fe,stroke:#01579b,stroke-width:3px
+    style H fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
-## Detailed Module Breakdown
+## Module Descriptions
 
-### 1. Sensory Input Layer
-Captures and preprocesses environmental data for contextual awareness.
+### Sensory Input System
 
-- **Wake Word Detector**: Uses keyword spotting algorithms to activate NeoMate without constant listening.
-- **Speech-to-Text Engine**: Employs advanced NLP models (e.g., Whisper) for accurate transcription.
-- **Computer Vision Engine**: Leverages OpenCV and ML models for screen analysis, object detection, and gesture recognition.
-- **Audio Analyzer**: Processes ambient sounds for mood detection or environmental cues.
-- **Sensor Fusion**: Integrates data from IoT devices, wearables, or system sensors for holistic input.
+This module captures environmental data from multiple sources:
 
-### 2. Cognitive Core
-The "brain" of NeoMate, handling reasoning, planning, and intelligence.
+- **Voice Input**: Detects wake words and converts speech to text using Whisper.cpp.
+- **Visual Input**: Analyzes screen content via OpenCV for context-aware responses.
+- **Audio Input**: Processes system sounds to understand background activities.
 
-- **Cognitive Control Hub**: Central orchestrator that synthesizes inputs into coherent understanding.
-- **Task Decomposition**: Breaks complex queries into manageable, parallel sub-tasks.
-- **Multi-Task Orchestrator**: Manages concurrent operations, prioritizing based on urgency and dependencies.
-- **Intelligence Selector**: Dynamically chooses LLM sources (local for privacy, cloud for advanced tasks).
-- **Action Planner**: Generates executable plans with fallback strategies.
+### Core Logic & Brain (Cognitive Control Architecture)
 
-### 3. Execution & Output Layer
-Translates cognitive decisions into real-world actions and responses.
+The central intelligence hub that orchestrates all operations:
 
-- **Action Engine**: Interfaces with OS APIs for automation, ensuring secure and controlled interactions.
-- **OS Automation**: Uses libraries like PyAutoGUI for mouse/keyboard simulation.
-- **App Integrations**: Direct APIs for productivity tools (e.g., email, calendar).
-- **Text-to-Speech Engine**: Generates human-like voice output using models like ElevenLabs or Coqui TTS.
+- Processes inputs from sensory modules.
+- Uses the Task Planner to break down complex requests into executable steps.
+- Selects appropriate LLM (online or local) based on availability and requirements.
+- Makes decisions on actions, responses, and memory updates.
 
-### 4. Memory & Adaptation
-Enables learning and personalization over time.
+### Action & Output System
 
-- **Context Memory**: Manages session state and conversation history.
-- **Short-Term Cache**: Temporary storage for immediate recall.
-- **Long-Term Knowledge Base**: Persistent user profiles, preferences, and learned behaviors.
-- **Adaptive Learning**: Reinforcement learning algorithms to refine responses based on user feedback.
+Translates decisions into real-world effects:
 
-## Data Flow Examples
+- **Action Engine**: Executes commands like mouse clicks, keyboard inputs, or app launches.
+- **Text-to-Speech Engine**: Generates natural voice responses using Piper TTS.
+- Integrates with OS APIs for seamless control.
 
-### Example 1: Simple Command ("Play music")
-1. **Input**: Voice detected → STT → "Play music".
-2. **Processing**: Cognitive Hub interprets intent → Selector chooses local LLM → Planner: "Open music app".
-3. **Execution**: Action Engine launches app → TTS confirms.
-4. **Memory**: Logs preference for music genre.
+### Memory & Learning System
 
-### Example 2: Complex Task ("Schedule a meeting and send invites")
-1. **Input**: Multi-modal (voice + screen context).
-2. **Processing**: Decomposition into sub-tasks → Orchestrator handles parallel actions.
-3. **Execution**: Automates calendar app, drafts emails, sends invites.
-4. **Feedback**: Provides summary via voice/text.
+Enables adaptive behavior:
 
-### Example 3: Ethical Override ("Do something harmful")
-1. **Detection**: Ethical filters in Cognitive Hub flag request.
-2. **Response**: Rejects action, suggests alternatives, logs for review.
-3. **Adaptation**: Learns from patterns to prevent future issues.
+- **Short-term Memory**: Tracks current conversation context.
+- **Long-term Preferences**: Stores user habits and preferences for personalization.
+- Supports learning from interactions to improve future responses.
 
-## API and Integration Points
+## Example Data Flow
 
-NeoMate exposes internal APIs for extensibility:
+Consider the user command: _"Open my browser and search for Python tutorials."_
 
-- **Input APIs**: For custom sensors or third-party integrations.
-- **Core APIs**: To plug in new LLMs or reasoning modules.
-- **Action APIs**: For OS-specific automations or app hooks.
-- **Memory APIs**: For data export/import and synchronization.
+1. **Input Processing**: Wake Word Detector triggers Speech-to-Text, converting voice to text.
+2. **Context Analysis**: Computer Vision scans the screen for open apps; Audio Analyzer checks for background noise.
+3. **Task Planning**: Cognitive Control Architecture parses the request, identifying two sub-tasks: "Open browser" and "Search for Python tutorials."
+4. **Intelligence Selection**: LLM Brain Selector chooses a local model for quick response or online for advanced reasoning.
+5. **Execution**: Action Engine launches the browser and performs the search via keyboard simulation.
+6. **Response**: TTS Engine confirms: _"Browser opened and search completed."_
+7. **Memory Update**: Stores the interaction for future reference, e.g., user's preferred browser.
 
-## Deployment and Infrastructure
+## Data Flow Principles
 
-- **Local Deployment**: Runs on user devices (Windows/Linux/Mac) with minimal hardware requirements (4GB RAM, GPU optional).
-- **Cloud Hybrid**: Optional cloud components for heavy computations, with data encryption.
-- **Containerization**: Docker-based for easy setup and updates.
-- **Monitoring**: Built-in logging and telemetry for performance tracking.
+- **Unidirectional Flow**: Data moves from input to processing to output, minimizing loops.
+- **Error Handling**: Each module includes fallback mechanisms (e.g., offline mode if API fails).
+- **Scalability**: Components can be scaled independently (e.g., multiple LLM instances).
+- **Security**: All data flows through encrypted channels; sensitive info never leaves local storage.
 
-## Security & Scalability Considerations
+## Future Extensions
 
-| Aspect | Implementation |
-|--------|----------------|
-| **Security** | AES-256 encryption, zero-knowledge proofs, biometric locks. |
-| **Scalability** | Microservices architecture, horizontal scaling for multi-device sync. |
-| **Error Handling** | Graceful degradation, auto-recovery, user notifications. |
-| **Compliance** | GDPR/CCPA adherence, audit trails for data usage. |
-
-## Performance Metrics
-
-- **Response Time**: <200ms for simple queries, <1s for complex tasks.
-- **Accuracy**: 95%+ intent recognition, 90%+ action success rate.
-- **Resource Usage**: <500MB RAM idle, <2GB active.
-- **Uptime**: 99.9% local reliability.
-
-## Challenges & Solutions
-
-| Challenge | Solution |
-|-----------|----------|
-| Contextual Ambiguity | Advanced NLP + vision fusion for disambiguation. |
-| Privacy vs. Capability | Hybrid model with user-controlled toggles. |
-| Hardware Variability | Adaptive algorithms for low-end devices. |
-| Ethical AI | Integrated guidelines with human-in-the-loop overrides. |
-
-## Roadmap for Enhancements
-
-### Phase 1: Foundation (Current)
-- Core modules implementation and testing.
-
-### Phase 2: Expansion (2025)
-- IoT integrations, emotion detection, multi-language NLP.
-
-### Phase 3: Ecosystem (2026)
-- Plugin marketplace, enterprise APIs, global scaling.
-
-### Phase 4: Autonomy (2027+)
-- Self-evolving AI, predictive actions, full autonomy.
-
-## Call to Action
-
-Contribute to NeoMate's architecture by proposing modules, testing integrations, or sharing ideas. Join the development community to shape the future of AI companions.
+- **Multi-Modal Integration**: Support for images, videos, and gestures.
+- **Distributed Processing**: Cloud offloading for heavy computations.
+- **Plugin System**: Allow third-party modules for custom functionalities.
 
 ---
 
-*This document is collaboratively maintained. For updates, see [GitHub Repository](https://github.com/emonhmamun).*
+_For implementation details, refer to the source code in `src/`. Last updated: [Date]._
