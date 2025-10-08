@@ -57,39 +57,71 @@ class ConfigLoader:
 
     def _load_and_validate_config(self) -> Dict[str, Any]:
         """
-        Load configuration from settings.yaml file with validation and overrides.
+        Load configuration from settings.yaml and wake_words.yaml files with validation and overrides.
 
         Returns:
             Dict[str, Any]: Validated configuration dictionary.
 
         Raises:
-            FileNotFoundError: If the configuration file is not found.
-            yaml.YAMLError: If there's an error parsing the YAML file.
+            FileNotFoundError: If the configuration folder is not found.
+            yaml.YAMLError: If there's an error parsing the YAML files.
             ValueError: If required configuration keys are missing.
         """
         config_path = self._get_config_path()
+        wake_words_path = self._get_wake_words_path()
 
-        if not config_path.exists():
-            error_msg = (
-                f"Configuration file 'settings.yaml' not found at {config_path}. "
-                "Please ensure it exists in the 'config' directory."
-            )
-            logger.error(error_msg)
-            raise FileNotFoundError(error_msg)
+        # Check if config folder exists
+        if not config_path.parent.exists():
+            raise FileNotFoundError(f"Config folder not found at {config_path.parent}")
 
-        try:
-            with open(config_path, 'r', encoding='utf-8') as file:
-                config = yaml.safe_load(file)
-                if config is None:
-                    config = {}
-        except yaml.YAMLError as e:
-            logger.error(f"Error parsing configuration file: {e}")
-            raise
+        # Load settings.yaml
+        if config_path.exists():
+            try:
+                with open(config_path, 'r', encoding='utf-8') as file:
+                    config = yaml.safe_load(file)
+                    if config is None:
+                        config = {}
+                logger.info(f"Settings loaded from {config_path}")
+            except yaml.YAMLError as e:
+                logger.error(f"Error parsing settings.yaml: {e}")
+                raise
+        else:
+            logger.warning(f"Settings file 'settings.yaml' not found at {config_path}. Using default empty settings.")
+            config = {}
 
-        logger.info(f"Configuration loaded from {config_path}")
+        # Load wake_words.yaml
+        if wake_words_path.exists():
+            try:
+                with open(wake_words_path, 'r', encoding='utf-8') as file:
+                    wake_words_config = yaml.safe_load(file)
+                    if wake_words_config is None:
+                        wake_words_config = {}
+                    # Merge wake words into config
+                    if 'wake_words' in wake_words_config:
+                        wake_words_data = wake_words_config['wake_words']
+                        # Flatten all wake word lists into a single list for wake_word.keywords
+                        all_keywords = []
+                        for category, words in wake_words_data.items():
+                            if isinstance(words, list):
+                                all_keywords.extend(words)
+                        if 'wake_word' not in config:
+                            config['wake_word'] = {}
+                        config['wake_word']['keywords'] = list(set(all_keywords))  # Remove duplicates
+                        # Also store the full structure under wake_words_config
+                        config['wake_words_config'] = wake_words_config
+                    else:
+                        config['wake_words_config'] = wake_words_config
+            except yaml.YAMLError as e:
+                logger.error(f"Error parsing wake_words.yaml: {e}")
+                raise
+            logger.info(f"Wake words loaded from {wake_words_path}")
+        else:
+            logger.warning(f"Wake words file 'wake_words.yaml' not found at {wake_words_path}. Using empty wake words.")
+            config['wake_words_config'] = {}
 
-        # Validate required keys
-        self._validate_config(config)
+        # Validate required keys (skip if settings are empty)
+        if 'application' in config:
+            self._validate_config(config)
 
         # Apply environment variable overrides
         config = self._apply_env_overrides(config)
@@ -106,6 +138,16 @@ class ConfigLoader:
         """
         # Assuming this script is in src/utils/, config is at project root
         return Path(__file__).parent.parent.parent / "config" / "settings.yaml"
+
+    def _get_wake_words_path(self) -> Path:
+        """
+        Determine the absolute path to the wake words configuration file.
+
+        Returns:
+            Path: Absolute path to wake_words.yaml.
+        """
+        # Assuming this script is in src/utils/, config is at project root
+        return Path(__file__).parent.parent.parent / "config" / "wake_words.yaml"
 
     def _validate_config(self, config: Dict[str, Any]) -> None:
         """

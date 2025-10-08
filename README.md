@@ -187,7 +187,29 @@ Essential helpers that tie everything together.
 
 ### Installation
 
-#### Using pip (Recommended)
+#### Using Poetry (Recommended)
+
+This project uses Poetry for dependency management. Install Poetry first if you haven't:
+
+```bash
+# Install Poetry (if not installed)
+curl -sSL https://install.python-poetry.org | python3 -
+# Or on Windows:
+(Invoke-WebRequest -Uri https://install.python-poetry.org -UseBasicParsing).Content | python -
+```
+
+Then:
+
+```bash
+git clone https://github.com/emonhmamun/NeoMate-AI.git
+cd NeoMate-AI
+poetry install
+poetry shell  # Activate the virtual environment
+```
+
+#### Using pip (Alternative)
+
+If you prefer pip:
 
 ```bash
 git clone https://github.com/emonhmamun/NeoMate-AI.git
@@ -197,7 +219,8 @@ python -m venv neomate_env
 neomate_env\Scripts\activate
 # On macOS/Linux:
 source neomate_env/bin/activate
-pip install -r requirements.txt
+pip install poetry  # To use pyproject.toml
+poetry install
 ```
 
 #### Using Conda (Alternative)
@@ -213,18 +236,25 @@ conda activate neomate-ai-env
 
 ### Configuration
 
-Copy the example config and edit as needed:
+The configuration files are located in the `config/` directory:
 
-```bash
-cp config/settings.yaml.example config/settings.yaml
-```
+- `config/settings.yaml`: Main application settings
+- `config/wake_words.yaml`: Wake word configurations
 
-Edit `config/settings.yaml` to customize language, voice, API keys, privacy, and more.
+Edit these files to customize language, voice, API keys, privacy, and more.
 
 ### Running NeoMate AI
 
+**Note**: This project is currently in early development. The main entry point is being implemented.
+
+To run the application (once implemented):
+
 ```bash
 python src/main.py
+# Or using Poetry:
+poetry run python src/main.py
+# Or using the script:
+poetry run neomate
 ```
 
 ## 🎮 Usage Examples
@@ -243,13 +273,8 @@ We welcome contributions! Please see [CONTRIBUTING.md](docs/contributing.md) for
 ```bash
 git clone https://github.com/emonhmamun/NeoMate-AI.git
 cd NeoMate-AI
-python -m venv dev_env
-# Activate environment
-# Windows:
-dev_env\Scripts\activate
-# macOS/Linux:
-source dev_env/bin/activate
-pip install -r requirements-dev.txt
+poetry install --with dev
+poetry shell  # Activate the virtual environment
 pre-commit install
 ```
 
