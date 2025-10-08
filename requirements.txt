@@ -4,7 +4,6 @@ PyQt6>=6.5.0
 PyQt6-Qt6>=6.5.0
 
 # Tier 1: Senses (Input Processing)
-pvporcupine>=3.0.0
 openai-whisper>=20231117
 mss>=9.0.0
 opencv-python>=4.8.0
