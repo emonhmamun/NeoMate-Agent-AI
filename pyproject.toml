@@ -81,7 +81,7 @@ cohere = "^5.5.0"
 ai21 = "^2.0.0"
 
 # Tier 3: The Hands
-pyautogui = "^0.9.54"
+pyautogui = "^0.9.54"  # Temporarily removed due to dependency issues
 pydirectinput = "^1.0.4"
 pynput = "^1.7.6"
 pyperclip = "^1.8.2"
